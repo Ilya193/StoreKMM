@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    kotlin("plugin.serialization").version("1.9.20")
 }
 
 kotlin {
@@ -26,7 +27,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
             implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
