@@ -66,7 +66,6 @@ fun Content(viewModel: MainViewModel) {
 
 @Composable
 fun GoodItem(item: GoodUi) {
-    TestGeneric()
     Column(modifier = Modifier.fillMaxWidth().height(400.dp)) {
         Text(
             modifier = Modifier.padding(4.dp).fillMaxWidth().height(20.dp),
