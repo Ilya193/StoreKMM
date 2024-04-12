@@ -1,13 +1,13 @@
 package ru.ikom.storekmm
 
-sealed class LoadResult<out T> {
+sealed class LoadResult {
 
-    data class Success<T>(
-        val data: T
-    ): LoadResult<T>()
+    data class Success(
+        val data: List<GoodDomain>
+    ): LoadResult()
 
     data class Error(
         val e: ErrorType
-    ): LoadResult<Nothing>()
+    ): LoadResult()
 
 }
