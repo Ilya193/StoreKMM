@@ -1,10 +1,11 @@
 import SwiftUI
+import shared
 
 @main
-struct iOSApp: App {
+struct iOSApp: App {    
 	var body: some Scene {
 		WindowGroup {
-            ContentView(viewModel: ContentView.ViewModel())
+            ContentView(viewModel: ContentView.ViewModel(repository: AppModule().provideRepository()))
 		}
 	}
 }
