@@ -1,4 +1,4 @@
-package ru.ikom.storekmm
+package ru.ikom.storekmm.domain
 
 sealed class LoadResult {
 

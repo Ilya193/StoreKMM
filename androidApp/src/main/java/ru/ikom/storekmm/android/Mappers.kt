@@ -1,6 +1,6 @@
 package ru.ikom.storekmm.android
 
-import ru.ikom.storekmm.GoodDomain
+import ru.ikom.storekmm.domain.GoodDomain
 
 object Mappers {
 

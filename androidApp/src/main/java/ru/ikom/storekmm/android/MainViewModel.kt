@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.ikom.storekmm.LoadResult
-import ru.ikom.storekmm.StoreRepository
+import ru.ikom.storekmm.domain.LoadResult
+import ru.ikom.storekmm.domain.StoreRepository
 import ru.ikom.storekmm.android.Mappers.toGoodUi
 
 class MainViewModel(
