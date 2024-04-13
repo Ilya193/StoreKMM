@@ -17,20 +17,22 @@ class MainViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(GoodsUiState())
+    private val _uiState = MutableStateFlow(GoodsUiState(isLoading = true))
     val uiState: StateFlow<GoodsUiState> get() = _uiState.asStateFlow()
 
     fun fetchData() = viewModelScope.launch(dispatcher) {
+        _uiState.value = GoodsUiState(isLoading = true)
         when (val res = repository.fetchGoods()) {
             is LoadResult.Success -> _uiState.value = GoodsUiState(goods = res.data.map { it.toGoodUi() })
-            is LoadResult.Error -> _uiState.value = GoodsUiState(error = true)
+            is LoadResult.Error -> _uiState.value = GoodsUiState(isError = true)
         }
     }
 }
 
 data class GoodsUiState(
     val goods: List<GoodUi> = emptyList(),
-    val error: Boolean = false
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
 )
 
 data class GoodUi(
