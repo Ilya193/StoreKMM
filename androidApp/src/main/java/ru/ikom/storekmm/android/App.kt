@@ -1,16 +1,24 @@
 package ru.ikom.storekmm.android
 
 import android.app.Application
-import ru.ikom.storekmm.AppModule
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
+import ru.ikom.storekmm.sharedModule
 
 class App : Application() {
 
-    private val repository by lazy {
-        AppModule.provideRepository()
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            modules(appModule + sharedModule())
+        }
     }
 
-    val viewModel: MainViewModel by lazy {
-        MainViewModel(repository)
-    }
+}
 
+val appModule = module {
+    viewModel<MainViewModel> {
+        MainViewModel(get())
+    }
 }

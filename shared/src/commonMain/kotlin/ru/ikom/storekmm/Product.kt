@@ -3,7 +3,7 @@ package ru.ikom.storekmm
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Product(
+internal data class Product(
     val brand: String,
     val category: String,
     val description: String,

@@ -3,7 +3,7 @@ package ru.ikom.storekmm
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GoodsCloud(
+internal data class GoodsCloud(
     val limit: Int,
     val products: List<Product>,
     val skip: Int,

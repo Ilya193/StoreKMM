@@ -17,7 +17,7 @@ class MainViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<GoodsUiState>(GoodsUiState())
+    private val _uiState = MutableStateFlow(GoodsUiState())
     val uiState: StateFlow<GoodsUiState> get() = _uiState.asStateFlow()
 
     fun fetchData() = viewModelScope.launch(dispatcher) {

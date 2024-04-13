@@ -29,20 +29,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        val viewModel = (application as App).viewModel
         setContent {
             MyApplicationTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .windowInsetsPadding(WindowInsets.systemBars),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Content(viewModel)
+                    Content()
                 }
             }
         }
@@ -51,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Content(viewModel: MainViewModel) {
+fun Content(viewModel: MainViewModel = koinViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -67,21 +69,31 @@ fun Content(viewModel: MainViewModel) {
 
 @Composable
 fun GoodItem(item: GoodUi) {
-    Column(modifier = Modifier.fillMaxWidth().height(400.dp)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .height(400.dp)) {
         Text(
-            modifier = Modifier.padding(4.dp).fillMaxWidth().height(20.dp),
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth()
+                .height(20.dp),
             text = item.title,
             style = TextStyle(fontWeight = FontWeight.Normal, fontSize = 20.sp)
         )
 
         Text(
-            modifier = Modifier.padding(start = 8.dp, bottom = 4.dp).fillMaxWidth().height(20.dp),
+            modifier = Modifier
+                .padding(start = 8.dp, bottom = 4.dp)
+                .fillMaxWidth()
+                .height(20.dp),
             text = item.description,
             style = TextStyle(fontWeight = FontWeight.Normal, fontSize = 15.sp)
         )
 
         AsyncImage(
-            modifier = Modifier.fillMaxWidth().weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             model = item.images[0],
             contentDescription = null,
             contentScale = ContentScale.Crop,
