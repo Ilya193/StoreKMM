@@ -16,7 +16,7 @@ struct DatabaseScreen: View {
     @ObservedObject private(set) var viewModel: ViewModel
     
     init() {
-        self.viewModel = ViewModel(repository: StoreHelper().injectNotesRepository())
+        self.viewModel = ViewModel(repository: NotesHelper().injectNotesRepository())
         self.viewModel.fetchData()
     }
     

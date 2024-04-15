@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.ikom.storekmm.domain.goods.LoadResult
+import ru.ikom.storekmm.domain.goods.GoodsLoadResult
 import ru.ikom.storekmm.domain.goods.StoreRepository
 import ru.ikom.storekmm.android.Mappers.toGoodUi
 
@@ -23,8 +23,8 @@ class NetworkViewModel(
     fun fetchData() = viewModelScope.launch(dispatcher) {
         _uiState.value = GoodsUiState(isLoading = true)
         when (val res = repository.fetchGoods()) {
-            is LoadResult.Success -> _uiState.value = GoodsUiState(goods = res.data.map { it.toGoodUi() })
-            is LoadResult.Error -> _uiState.value = GoodsUiState(isError = true)
+            is GoodsLoadResult.Success -> _uiState.value = GoodsUiState(goods = res.data.map { it.toGoodUi() })
+            is GoodsLoadResult.Error -> _uiState.value = GoodsUiState(isError = true)
         }
     }
 }

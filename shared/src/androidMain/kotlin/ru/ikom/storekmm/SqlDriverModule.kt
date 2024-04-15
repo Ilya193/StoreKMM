@@ -1,7 +1,7 @@
 package ru.ikom.storekmm
 
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import sqldelight.ru.ikom.storekmm.AppDatabase

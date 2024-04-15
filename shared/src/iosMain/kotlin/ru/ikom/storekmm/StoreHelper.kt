@@ -9,9 +9,11 @@ import ru.ikom.storekmm.domain.notes.NotesRepository
 
 class StoreHelper: KoinComponent {
     private val storeRepository: StoreRepository by inject()
-    private val notesRepository: NotesRepository by inject()
-
     fun injectStoreRepository(): StoreRepository = storeRepository
+}
+
+class NotesHelper : KoinComponent {
+    private val notesRepository: NotesRepository by inject()
     fun injectNotesRepository(): NotesRepository = notesRepository
 }
 

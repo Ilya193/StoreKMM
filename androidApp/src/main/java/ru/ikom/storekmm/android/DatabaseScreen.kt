@@ -1,5 +1,6 @@
 package ru.ikom.storekmm.android
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -75,7 +76,7 @@ fun DatabaseScreen(viewModel: DatabaseViewModel = koinViewModel()) {
                 }
             }
 
-            if (uiState.showDialog) {
+            AnimatedVisibility(uiState.showDialog) {
                 DialogAddingNote(
                     onDismiss = { viewModel.event(Event.ShowDialog(false)) },
                     add = { viewModel.event(Event.AddNote(it)) })

@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     kotlin("plugin.serialization").version("1.9.20")
     alias(libs.plugins.sqldelight)
-    //id("app.cash.sqldelight") version "2.0.0"
 }
 
 kotlin {
@@ -47,6 +46,7 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqldelight.native.driver)
+            implementation(libs.stately.common)
         }
     }
 }
@@ -64,7 +64,9 @@ android {
 }
 
 sqldelight {
-    database("AppDatabase") {
-        packageName = "sqldelight.ru.ikom.storekmm"
+    databases {
+        create("AppDatabase") {
+            packageName.set("sqldelight.ru.ikom.storekmm")
+        }
     }
 }

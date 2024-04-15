@@ -57,19 +57,17 @@ extension NetworkScreen {
         func fetchData() {
             repository.fetchGoods { result, e in
                 switch result {
-                case let success as LoadResult.Success:
+                case let success as GoodsLoadResult.Success:
                     let goods = success.data.map { item in
                         item.toGoodUi()
                     }
                     DispatchQueue.main.async {
                         self.uiState = GoodUiState(goods: goods)
                     }
-                case let error as LoadResult.Error:
+                default:
                     DispatchQueue.main.async {
                         self.uiState = GoodUiState(isError: true)
                     }
-                default:
-                    print("error")
                 }
             }
         }

@@ -2,14 +2,14 @@ package ru.ikom.storekmm.domain.goods
 
 import ru.ikom.storekmm.domain.ErrorType
 
-sealed class LoadResult {
+sealed class GoodsLoadResult {
 
     data class Success(
         val data: List<GoodDomain>
-    ): LoadResult()
+    ): GoodsLoadResult()
 
     data class Error(
         val e: ErrorType
-    ): LoadResult()
+    ): GoodsLoadResult()
 
 }
