@@ -38,9 +38,17 @@ struct GoodView: View {
     }
     
     var body: some View {
-        Text(good.title).font(.title)
-        Text(good.description).font(.subheadline).padding([.trailing], 8)
-        AsyncImage(url: URL(string: good.images[0]))
+        VStack {
+            Text(good.title).font(.title).frame(maxWidth: .infinity)
+            Text(good.description)
+                .frame(maxWidth: .infinity)
+            AsyncImage(url: URL(string: good.images[0])) { image in
+                image.resizable().frame(height: CGFloat(400))
+            } placeholder: {
+                ProgressView()
+            }
+        
+        }
     }
 }
 
