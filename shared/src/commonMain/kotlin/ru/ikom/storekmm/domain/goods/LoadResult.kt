@@ -1,4 +1,6 @@
-package ru.ikom.storekmm.domain
+package ru.ikom.storekmm.domain.goods
+
+import ru.ikom.storekmm.domain.ErrorType
 
 sealed class LoadResult {
 

@@ -1,4 +1,4 @@
-package ru.ikom.storekmm.domain
+package ru.ikom.storekmm.domain.goods
 
 data class GoodDomain(
     val brand: String,

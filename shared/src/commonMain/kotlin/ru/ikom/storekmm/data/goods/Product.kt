@@ -1,7 +1,7 @@
-package ru.ikom.storekmm.data
+package ru.ikom.storekmm.data.goods
 
 import kotlinx.serialization.Serializable
-import ru.ikom.storekmm.domain.GoodDomain
+import ru.ikom.storekmm.domain.goods.GoodDomain
 
 @Serializable
 internal data class Product(

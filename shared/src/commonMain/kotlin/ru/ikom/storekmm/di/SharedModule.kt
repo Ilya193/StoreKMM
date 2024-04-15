@@ -1,3 +1,5 @@
 package ru.ikom.storekmm.di
 
-fun sharedModule() = listOf(commonModule)
+import ru.ikom.storekmm.sqlDriverModule
+
+fun sharedModule() = listOf(commonModule, sqlDriverModule, databaseModule)

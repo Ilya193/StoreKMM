@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.ikom.storekmm.domain.LoadResult
-import ru.ikom.storekmm.domain.StoreRepository
+import ru.ikom.storekmm.domain.goods.LoadResult
+import ru.ikom.storekmm.domain.goods.StoreRepository
 import ru.ikom.storekmm.android.Mappers.toGoodUi
 
-class MainViewModel(
+class NetworkViewModel(
     private val repository: StoreRepository,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {

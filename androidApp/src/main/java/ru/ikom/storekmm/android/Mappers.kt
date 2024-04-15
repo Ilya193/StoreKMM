@@ -1,6 +1,7 @@
 package ru.ikom.storekmm.android
 
-import ru.ikom.storekmm.domain.GoodDomain
+import ru.ikom.storekmm.domain.goods.GoodDomain
+import ru.ikom.storekmm.domain.notes.NoteDomain
 
 object Mappers {
 
@@ -18,4 +19,6 @@ object Mappers {
             thumbnail,
             title
         )
+
+    fun NoteDomain.toNoteUi(): NoteUi = NoteUi(id, title)
 }
