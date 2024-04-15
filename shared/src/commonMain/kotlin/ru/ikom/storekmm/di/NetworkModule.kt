@@ -8,7 +8,7 @@ import org.koin.dsl.module
 import ru.ikom.storekmm.domain.goods.StoreRepository
 import ru.ikom.storekmm.data.goods.StoreRepositoryImpl
 
-val commonModule = module {
+val networkModule = module {
     single<HttpClient> {
         HttpClient {
             install(ContentNegotiation) {
