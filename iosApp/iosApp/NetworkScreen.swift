@@ -1,12 +1,12 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
+struct NetworkScreen: View {
     
     @ObservedObject private(set) var viewModel: ViewModel
     
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
+    init() {
+        self.viewModel = ViewModel(repository: StoreHelper().injectStoreRepository())
         self.viewModel.fetchData()
     }
     
@@ -16,10 +16,10 @@ struct ContentView: View {
         }
         
         if (!viewModel.uiState.goods.isEmpty) {
-            List(viewModel.uiState.goods, id: \.id) { item in
-                Text(item.title).font(.title)
-                Text(item.description).font(.subheadline).padding([.trailing], 8)
-                AsyncImage(url: URL(string: item.images[0]))
+            NavigationView {
+                List(viewModel.uiState.goods, id: \.id) { item in
+                    GoodView(good: item)
+                }
             }.ignoresSafeArea()
         }
         
@@ -30,15 +30,25 @@ struct ContentView: View {
 	}
 }
 
-extension ContentView {
+struct GoodView: View {
+    private let good: GoodUi
+    
+    init(good: GoodUi) {
+        self.good = good
+    }
+    
+    var body: some View {
+        Text(good.title).font(.title)
+        Text(good.description).font(.subheadline).padding([.trailing], 8)
+        AsyncImage(url: URL(string: good.images[0]))
+    }
+}
+
+extension NetworkScreen {
     class ViewModel: ObservableObject {
         private let repository: StoreRepository
         
         @Published var uiState: GoodUiState = GoodUiState(isLoading: true)
-        
-        //@Published var uiState: [GoodUi] = []
-        //@Published
-        //@Published var isError: Bool = false
         
         init(repository: StoreRepository) {
             self.repository = repository
@@ -84,9 +94,3 @@ struct GoodUiState {
     var isLoading: Bool = false
     var isError: Bool = false
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		ContentView()
-//	}
-//}

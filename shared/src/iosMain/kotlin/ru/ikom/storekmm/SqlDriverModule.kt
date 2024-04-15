@@ -10,4 +10,8 @@ actual val sqlDriverModule: Module = module {
     single<SqlDriver> {
         NativeSqliteDriver(AppDatabase.Schema, "notes.db")
     }
+
+    single<AppDatabase> {
+        AppDatabase(get())
+    }
 }
