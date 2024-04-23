@@ -58,7 +58,7 @@ extension DatabaseScreen {
         }
         
         func fetchData() {
-            repository.fetchNotes { notes, error in
+            let observer = Observer<[NoteDomain]>(callback: { notes in
                 if let notesUi = notes?.map({ note in
                     note.toNoteUi()
                 }) {
@@ -66,20 +66,33 @@ extension DatabaseScreen {
                         self.uiState = NotesUiState(notes: notesUi)
                     }
                 }
-            }
+            })
+            
+            do {
+                try repository.fetchNotes().collect(collector: observer, completionHandler: { _ in })
+            } catch {}
         }
         
         func insertNote(title: String) {
-            repository.insertNote(title: title) { e in
-                self.fetchData()
-            }
+            repository.insertNote(title: title) { _ in }
         }
         
         func deleteNoteById(id: Int64) {
-            repository.deleteById(id: id) { e in
-                self.fetchData()
-            }
+            repository.deleteById(id: id) { _ in }
         }
+    }
+}
+
+class Observer<T> : Kotlinx_coroutines_coreFlowCollector {
+    let callback: (T?) -> Void
+    
+    init(callback: @escaping (T?) -> Void) {
+        self.callback = callback
+    }
+    
+    func emit(value: Any?, completionHandler: @escaping (Error?) -> Void) {
+        callback(value as? T)
+        completionHandler(nil)
     }
 }
 
