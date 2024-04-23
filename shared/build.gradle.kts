@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.core)
             implementation(libs.sqldelight.runtime)
+            implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

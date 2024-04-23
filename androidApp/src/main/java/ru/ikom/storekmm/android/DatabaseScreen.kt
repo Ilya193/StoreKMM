@@ -76,7 +76,7 @@ fun DatabaseScreen(viewModel: DatabaseViewModel = koinViewModel()) {
                 }
             }
 
-            AnimatedVisibility(uiState.showDialog) {
+            if (uiState.showDialog) {
                 DialogAddingNote(
                     onDismiss = { viewModel.event(Event.ShowDialog(false)) },
                     add = { viewModel.event(Event.AddNote(it)) })

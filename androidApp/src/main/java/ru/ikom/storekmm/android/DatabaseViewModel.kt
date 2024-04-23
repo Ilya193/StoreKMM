@@ -21,8 +21,10 @@ class DatabaseViewModel(
     val uiState: StateFlow<NotesUiState> get() = _uiState.asStateFlow()
 
     fun fetchNotes() = viewModelScope.launch(dispatcher) {
-        val notes = repository.fetchNotes().map { it.toNoteUi() }
-        _uiState.value = NotesUiState(notes = notes.toList())
+        repository.fetchNotes().collect {
+            _uiState.value = NotesUiState(notes = it.map { it.toNoteUi() })
+        }
+        //val notes = repository.fetchNotes().map { it.toNoteUi() }
     }
 
     fun event(event: Event) = viewModelScope.launch(dispatcher) {
@@ -39,12 +41,10 @@ class DatabaseViewModel(
 
     private suspend fun insertNote(title: String) {
         repository.insertNote(title)
-        fetchNotes()
     }
 
     private suspend fun deleteNoteById(id: Long) {
         repository.deleteById(id)
-        fetchNotes()
     }
 }
 
